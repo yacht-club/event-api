@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import java.time.Instant;
 import java.util.UUID;
 
-public class EventInfo {
+public class EventInfo implements Comparable {
 
     private UUID eventUid;
     private String name;
@@ -73,5 +73,14 @@ public class EventInfo {
     @JsonGetter("place")
     public String getPlace() {
         return place;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        if (o instanceof EventInfo) {
+            EventInfo event = (EventInfo) o;
+            return this.dateFromMillis.getNano() - event.dateFromMillis.getNano();
+        }
+        return 0;
     }
 }

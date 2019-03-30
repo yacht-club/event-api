@@ -2,7 +2,6 @@ package com.sychev.events.model.response;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.sychev.events.model.TaskEnum;
-import com.sychev.events.model.entity.EventEntity;
 
 import java.time.Instant;
 import java.util.UUID;
@@ -14,7 +13,7 @@ public class TaskInfo {
     private String description;
     private String prsExtId;
     private Instant deadlineTime;
-    private EventEntity event;
+    private UUID eventUid;
     private String partnerExtId;
     private TaskEnum status;
 
@@ -25,7 +24,7 @@ public class TaskInfo {
             String prsExtId,
             String partnerExtId,
             Instant deadlineTime,
-            EventEntity event,
+            UUID eventUid,
             TaskEnum status) {
         this.taskUid = taskUid;
         this.name = name;
@@ -33,7 +32,7 @@ public class TaskInfo {
         this.prsExtId = prsExtId;
         this.partnerExtId = partnerExtId;
         this.deadlineTime = deadlineTime;
-        this.event = event;
+        this.eventUid = eventUid;
         this.status = status;
     }
 
@@ -67,9 +66,9 @@ public class TaskInfo {
         return deadlineTime;
     }
 
-    @JsonGetter("event")
-    public EventEntity getEvent() {
-        return event;
+    @JsonGetter("eventUid")
+    public UUID getEventUid() {
+        return eventUid;
     }
 
     @JsonGetter("status")

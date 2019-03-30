@@ -36,7 +36,7 @@ public class ModelConverter {
                 entity.getPrsExtId(),
                 entity.getPartnerExtId(),
                 entity.getDeadlineTime(),
-                entity.getEvent(),
+                entity.getEvent().getEventUid(),
                 entity.getStatus()
                 );
     }

@@ -14,6 +14,8 @@ public interface EventService {
 
     List<EventInfo> getAllEvents(String name);
 
+    List<EventInfo> getAllArchiveEvents(String name);
+
     EventInfo getEvent(UUID eventUid);
 
     UUID addEvent(AddEventRequest request);

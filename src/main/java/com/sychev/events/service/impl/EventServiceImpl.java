@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -47,14 +48,38 @@ public class EventServiceImpl implements EventService {
             return getByName(name);
         }
         return eventRepository.findAll().stream()
+                .filter(event -> event.getDateFromMillis().isAfter(Instant.now()))
                 .map(ModelConverter::convert)
+                .sorted()
                 .collect(Collectors.toList());
     }
 
     private List<EventInfo> getByName(String name) {
         return eventRepository.findAll().stream()
                 .filter(eventEntity -> eventEntity.getName().contains(name))
+                .filter(event -> event.getDateFromMillis().isAfter(Instant.now()))
                 .map(ModelConverter::convert)
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<EventInfo> getAllArchiveEvents(String name) {
+        if (name != null) {
+            return getArchiveEventsByName(name);
+        }
+        return eventRepository.findAll().stream()
+                .filter(event -> event.getDateFromMillis().isBefore(Instant.now()))
+                .map(ModelConverter::convert)
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
+    private List<EventInfo> getArchiveEventsByName(String name) {
+        return eventRepository.findAll().stream()
+                .filter(eventEntity -> eventEntity.getName().contains(name))
+                .map(ModelConverter::convert)
+                .sorted()
                 .collect(Collectors.toList());
     }
 

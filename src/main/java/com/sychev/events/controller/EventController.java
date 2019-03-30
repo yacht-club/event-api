@@ -35,6 +35,15 @@ public class EventController {
         return ResponseEntity.ok(eventService.getAllEvents(name));
     }
 
+    @GetMapping("/archive")
+    public ResponseEntity<List<EventInfo>> getAllArchiveEvents(
+            @RequestParam(name = "name", required = false) String name) {
+
+        logger.debug("Getting all archive events");
+
+        return ResponseEntity.ok(eventService.getAllArchiveEvents(name));
+    }
+
     @GetMapping("/{eventUid}")
     public ResponseEntity<EventInfo> getEvent(@PathVariable UUID eventUid) {
         logger.debug("Getting event with uid: {} ", eventUid);

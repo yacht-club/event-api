@@ -20,7 +20,7 @@ public class EventEntity {
     private Instant timeFromMillis;
     private Instant timeTillMillis;
     private String place;
-    private UUID ownerExtId;
+    private String ownerExtId;
 
     public EventEntity() {
     }
@@ -105,11 +105,11 @@ public class EventEntity {
     }
 
     @Column(name = "owner_ext_id", nullable = false)
-    public UUID getOwnerExtId() {
+    public String getOwnerExtId() {
         return ownerExtId;
     }
 
-    public EventEntity setOwnerExtId(UUID ownerExtId) {
+    public EventEntity setOwnerExtId(String ownerExtId) {
         this.ownerExtId = ownerExtId;
         return this;
     }

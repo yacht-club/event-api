@@ -1,6 +1,5 @@
 package com.sychev.events.converter;
 
-
 import com.sychev.events.model.entity.EventEntity;
 import com.sychev.events.model.entity.RelEventPartnersEntity;
 import com.sychev.events.model.entity.TaskEntity;
@@ -24,8 +23,7 @@ public class ModelConverter {
                 entity.getTimeFromMillis(),
                 entity.getTimeTillMillis(),
                 entity.getPlace(),
-                entity.getOwnerExtId()
-        );
+                entity.getOwnerExtId());
     }
 
     public static TaskInfo convert(TaskEntity entity) {
@@ -35,8 +33,7 @@ public class ModelConverter {
                 entity.getDescription(),
                 entity.getDeadlineTime(),
                 entity.getResponsiblePrsUid(),
-                entity.getPartnerExtId()
-        );
+                entity.getPartnerExtId());
     }
 
     public static EventEntity convert(AddEventRequest request) {
@@ -49,7 +46,6 @@ public class ModelConverter {
                 .setOwnerExtId(request.getOwnerExtId())
                 .setTimeFromMillis(request.getTimeFromMillis())
                 .setTimeTillMillis(request.getTimeTillMillis());
-
     }
 
     public static TaskEntity convert(AddTaskRequest request) {
@@ -63,7 +59,6 @@ public class ModelConverter {
     }
 
     public static RelEventPartnersEntity convert(LinkEventWithPartnerRequest request, EventEntity eventEntity) {
-
         return new RelEventPartnersEntity()
                 .setPartnerUid(UUID.fromString(request.getPartnerExtId()))
                 .setEvent(eventEntity);

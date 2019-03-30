@@ -5,7 +5,6 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.validation.constraints.NotNull;
 import java.time.Instant;
-import java.util.UUID;
 
 public class AddEventRequest {
 
@@ -31,7 +30,7 @@ public class AddEventRequest {
     private String place;
 
     @NotNull
-    private UUID ownerExtId;
+    private String ownerExtId;
 
     public AddEventRequest(
             @JsonProperty("name") String name,
@@ -41,7 +40,7 @@ public class AddEventRequest {
             @JsonProperty("timeFromMillis") Instant timeFromMillis,
             @JsonProperty("timeTillMillis") Instant timeTillMillis,
             @JsonProperty("place") String place,
-            @JsonProperty("ownerExtId") UUID ownerExtId) {
+            @JsonProperty("ownerExtId") String ownerExtId) {
         this.name = name;
         this.description = description;
         this.dateFromMillis = dateFromMillis;
@@ -80,7 +79,7 @@ public class AddEventRequest {
         return place;
     }
 
-    public UUID getOwnerExtId() {
+    public String getOwnerExtId() {
         return ownerExtId;
     }
 

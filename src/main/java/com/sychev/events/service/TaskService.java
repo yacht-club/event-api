@@ -1,5 +1,6 @@
 package com.sychev.events.service;
 
+import com.sychev.events.model.TaskEnum;
 import com.sychev.events.model.request.AddTaskRequest;
 import com.sychev.events.model.request.LinkTaskWithPartnerRequest;
 import com.sychev.events.model.request.UpdateTaskRequest;
@@ -15,6 +16,8 @@ public interface TaskService {
     List<TaskInfo> getAllTasksByPrsExtId(String prsExtId);
 
     List<TaskInfo> getAllTasksByEvent(UUID eventUid);
+
+    List<TaskInfo> getAllTasksByStatus(TaskEnum status);
 
     TaskInfo getTask(UUID taskUid);
 

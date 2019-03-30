@@ -3,6 +3,7 @@ package com.sychev.events.service.impl;
 import com.sychev.events.converter.ModelConverter;
 import com.sychev.events.exception.NotFoundEventException;
 import com.sychev.events.exception.NotFoundTaskException;
+import com.sychev.events.model.TaskEnum;
 import com.sychev.events.model.entity.EventEntity;
 import com.sychev.events.model.entity.TaskEntity;
 import com.sychev.events.model.request.AddTaskRequest;
@@ -107,5 +108,13 @@ public class TaskServiceImpl implements TaskService {
         task.setStatus(request.getStatus());
 
         taskRepository.save(task);
+    }
+
+    @Override
+    public List<TaskInfo> getAllTasksByStatus(TaskEnum status) {
+        return taskRepository.findAll().stream()
+                .filter(task -> task.getStatus() == status)
+                .map(ModelConverter::convert)
+                .collect(Collectors.toList());
     }
 }

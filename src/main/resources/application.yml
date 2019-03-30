@@ -21,3 +21,19 @@ spring:
     url: "jdbc:postgresql://ec2-54-246-121-32.eu-west-1.compute.amazonaws.com/de1i7r1tk47278?sslmode=require&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"
     username: zhjidbjtviiygs
     password: "7f014fcf757bfb60fc49b8dd9f924bc3857dc98513e2efb3ae38cf3b064287e9"
+
+event:
+  web:
+    allowed-origins:
+      - http://127.0.0.1
+      - https://127.0.0.1
+      - http://127.0.0.1:3000
+      - https://127.0.0.1:3000
+      - http://127.0.0.1:8080
+      - https://127.0.0.1:8080
+      - http://localhost
+      - https://localhost
+      - http://localhost:3000
+      - https://localhost:3000
+      - http://localhost:8080
+      - https://localhost:8080

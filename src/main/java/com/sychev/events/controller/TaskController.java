@@ -1,5 +1,6 @@
 package com.sychev.events.controller;
 
+import com.sychev.events.model.TaskEnum;
 import com.sychev.events.model.request.AddTaskRequest;
 import com.sychev.events.model.request.LinkTaskWithPartnerRequest;
 import com.sychev.events.model.request.UpdateTaskRequest;
@@ -42,6 +43,13 @@ public class TaskController {
         return ResponseEntity.ok(taskService.getTask(taskUid));
     }
 
+    @GetMapping("/status/{status}")
+    public ResponseEntity<List<TaskInfo>> getAllTasksByStatus(@PathVariable TaskEnum status) {
+        logger.debug("Getting all task with status: {} ", status);
+
+        return ResponseEntity.ok(taskService.getAllTasksByStatus(status));
+    }
+
     @GetMapping("/event/{eventUid}")
     public ResponseEntity<List<TaskInfo>> getTasksByEvent(@PathVariable UUID eventUid) {
         logger.debug("Getting tasks by event uid: {} ", eventUid);
@@ -78,5 +86,7 @@ public class TaskController {
         taskService.updateTask(request);
         return ResponseEntity.ok().build();
     }
+
+
 
 }

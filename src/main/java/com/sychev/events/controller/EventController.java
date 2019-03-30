@@ -18,8 +18,8 @@ import java.util.UUID;
 @RequestMapping(path = "/api/events", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class EventController {
 
-    private final EventService eventService;
     private static final Logger logger = LoggerFactory.getLogger(EventController.class);
+    private final EventService eventService;
 
     @Autowired
     public EventController(EventService eventService) {

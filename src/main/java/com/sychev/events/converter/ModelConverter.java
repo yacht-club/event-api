@@ -1,9 +1,19 @@
 package com.sychev.events.converter;
 
 
+import com.sychev.events.exception.NotFoundEventException;
 import com.sychev.events.model.entity.EventEntity;
+import com.sychev.events.model.entity.RelEventPartnersEntity;
+import com.sychev.events.model.entity.TaskEntity;
 import com.sychev.events.model.request.AddEventRequest;
+import com.sychev.events.model.request.AddTaskRequest;
+import com.sychev.events.model.request.LinkEventWithPartnerRequest;
 import com.sychev.events.model.response.EventInfo;
+import com.sychev.events.model.response.TaskInfo;
+import com.sychev.events.repository.EventRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.UUID;
 
 public class ModelConverter {
 
@@ -21,6 +31,17 @@ public class ModelConverter {
         );
     }
 
+    public static TaskInfo convert(TaskEntity entity) {
+        return new TaskInfo(
+                entity.getTaskUid(),
+                entity.getName(),
+                entity.getDescription(),
+                entity.getDeadlineTime(),
+                entity.getResponsiblePrsUid(),
+                entity.getPartnerUid()
+        );
+    }
+
     public static EventEntity convert(AddEventRequest request) {
         return new EventEntity()
                 .setName(request.getName())
@@ -32,5 +53,22 @@ public class ModelConverter {
                 .setTimeFromMillis(request.getTimeFromMillis())
                 .setTimeTillMillis(request.getTimeTillMillis());
 
+    }
+
+    public static TaskEntity convert(AddTaskRequest request) {
+        return new TaskEntity()
+                .setName(request.getName())
+                .setDescription(request.getDescription())
+                .setPartnerUid(request.getPartnerUid())
+                .setResponsiblePrsUid(request.getResponsiblePrsUid())
+                .setDeadlineTime(request.getDeadlineTime());
+
+    }
+
+    public static RelEventPartnersEntity convert(LinkEventWithPartnerRequest request, EventEntity eventEntity) {
+
+        return new RelEventPartnersEntity()
+                .setPartnerUid(UUID.fromString(request.getPartnerExtId()))
+                .setEvent(eventEntity);
     }
 }

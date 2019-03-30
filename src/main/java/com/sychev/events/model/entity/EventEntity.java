@@ -4,11 +4,9 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.Instant;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -107,7 +105,7 @@ public class EventEntity {
         return this;
     }
 
-    @Column(name = "owner_uid", nullable = false)
+    @Column(name = "owner_external_id", nullable = false)
     public UUID getOwnerUid() {
         return ownerUid;
     }

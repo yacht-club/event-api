@@ -1,6 +1,7 @@
 package com.sychev.events.service;
 
 import com.sychev.events.model.request.AddEventRequest;
+import com.sychev.events.model.request.LinkEventWithPartnerRequest;
 import com.sychev.events.model.response.EventInfo;
 
 import java.util.List;
@@ -13,4 +14,6 @@ public interface EventService {
     EventInfo getEvent(UUID eventUid);
 
     UUID addEvent(AddEventRequest request);
+
+    void linkEventWithPartner(LinkEventWithPartnerRequest request);
 }

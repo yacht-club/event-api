@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.time.Instant;
 import java.util.UUID;
 
 @Entity
@@ -17,8 +18,9 @@ public class TaskEntity {
     private UUID taskUid = UUID.randomUUID();
     private String name;
     private String description;
-    private UUID responsiblePrsUid;
-    private UUID partnerUid;
+    private String responsiblePrsUid;
+    private Instant deadlineTime;
+    private String partnerUid;
 
     public TaskEntity() {
     }
@@ -37,8 +39,9 @@ public class TaskEntity {
         return name;
     }
 
-    public void setName(String name) {
+    public TaskEntity setName(String name) {
         this.name = name;
+        return this;
     }
 
     @Column(name = "description", nullable = false)
@@ -46,8 +49,9 @@ public class TaskEntity {
         return description;
     }
 
-    public void setDescription(String description) {
+    public TaskEntity setDescription(String description) {
         this.description = description;
+        return this;
     }
 
     @Column(name = "task_uid", nullable = false)
@@ -55,26 +59,39 @@ public class TaskEntity {
         return taskUid;
     }
 
-    public void setTaskUid(UUID taskUid) {
+    public TaskEntity setTaskUid(UUID taskUid) {
         this.taskUid = taskUid;
+        return this;
     }
 
-    @Column(name = "responsible_prs_id", nullable = false)
-    public UUID getResponsiblePrsUid() {
+    @Column(name = "prs_ext_id", nullable = false)
+    public String getResponsiblePrsUid() {
         return responsiblePrsUid;
     }
 
-    public void setResponsiblePrsUid(UUID responsiblePrsUid) {
+    public TaskEntity setResponsiblePrsUid(String responsiblePrsUid) {
         this.responsiblePrsUid = responsiblePrsUid;
+        return this;
     }
 
-    @Column(name = "partner_uid", nullable = false)
-    public UUID getPartnerUid() {
+    @Column(name = "deadline_time", nullable = false)
+    public Instant getDeadlineTime() {
+        return deadlineTime;
+    }
+
+    public TaskEntity setDeadlineTime(Instant deadlineTime) {
+        this.deadlineTime = deadlineTime;
+        return this;
+    }
+
+    @Column(name = "partner_ext_id", nullable = false)
+    public String getPartnerUid() {
         return partnerUid;
     }
 
-    public void setPartnerUid(UUID partnerUid) {
+    public TaskEntity setPartnerUid(String partnerUid) {
         this.partnerUid = partnerUid;
+        return this;
     }
 
     @Override

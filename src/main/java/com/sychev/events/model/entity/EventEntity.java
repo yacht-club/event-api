@@ -12,7 +12,7 @@ import java.time.Instant;
 import java.util.UUID;
 
 @Entity
-@Table(name = "events", schema = "events")
+@Table(name = "events", schema = "eventum")
 public class EventEntity {
     private Integer id;
     private UUID eventUid = UUID.randomUUID();
@@ -141,6 +141,4 @@ public class EventEntity {
     public int hashCode() {
         return HashCodeBuilder.reflectionHashCode(this);
     }
-
-
 }

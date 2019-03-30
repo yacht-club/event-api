@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import java.util.UUID;
 
 @Entity
-@Table(name = "tasks", schema = "events")
+@Table(name = "tasks", schema = "eventum")
 public class TaskEntity {
     private Integer id;
     private UUID taskUid = UUID.randomUUID();
@@ -91,5 +91,4 @@ public class TaskEntity {
     public int hashCode() {
         return HashCodeBuilder.reflectionHashCode(this);
     }
-
 }

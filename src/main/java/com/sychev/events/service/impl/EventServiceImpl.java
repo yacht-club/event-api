@@ -17,9 +17,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class EventServiceImpl implements EventService {
+    private static final Logger logger = LoggerFactory.getLogger(EventServiceImpl.class);
 
-    private Logger logger = LoggerFactory.getLogger(EventServiceImpl.class);
-    private EventRepository repository;
+    private final EventRepository repository;
 
     @Autowired
     public EventServiceImpl(EventRepository repository) {
@@ -37,7 +37,7 @@ public class EventServiceImpl implements EventService {
     public EventInfo getEvent(UUID eventUid) {
         return ModelConverter.convert(repository.findByEventUid(eventUid).orElseThrow(() -> {
             logger.info("Not found event with uid: " + eventUid);
-            throw new NotFoundEventException("Not found event with uid: " + eventUid);
+            return new NotFoundEventException("Not found event with uid: " + eventUid);
         }));
     }
 

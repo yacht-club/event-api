@@ -3,7 +3,6 @@ package com.sychev.events.model.request;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
@@ -12,7 +11,7 @@ public class LinkEventWithPartnerRequest {
     @NotNull
     private UUID eventUid;
 
-    @NotBlank
+    @NotNull
     private String partnerExtId;
 
     public LinkEventWithPartnerRequest(

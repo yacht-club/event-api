@@ -23,7 +23,6 @@ public class EventServiceImpl implements EventService {
     private static final Logger logger = LoggerFactory.getLogger(EventServiceImpl.class);
 
     private final EventRepository eventRepository;
-
     private final RelEventPartnersRepository relRepository;
 
     @Autowired
@@ -35,8 +34,9 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<EventInfo> getAllEvents() {
+    public List<EventInfo> getAllEvents(String name) {
         return eventRepository.findAll().stream()
+                .filter(eventEntity -> eventEntity.getName().contains(name))
                 .map(ModelConverter::convert)
                 .collect(Collectors.toList());
     }

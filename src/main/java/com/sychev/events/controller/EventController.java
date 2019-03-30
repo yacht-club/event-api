@@ -27,10 +27,12 @@ public class EventController {
     }
 
     @GetMapping
-    public ResponseEntity<List<EventInfo>> getAllEvents() {
+    public ResponseEntity<List<EventInfo>> getAllEvents(
+            @RequestParam(name = "name", required = false) String name) {
+
         logger.debug("Getting all events");
 
-        return ResponseEntity.ok(eventService.getAllEvents());
+        return ResponseEntity.ok(eventService.getAllEvents(name));
     }
 
     @GetMapping("/{eventUid}")

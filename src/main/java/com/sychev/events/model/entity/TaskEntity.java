@@ -20,7 +20,7 @@ public class TaskEntity {
     private String description;
     private String responsiblePrsUid;
     private Instant deadlineTime;
-    private String partnerUid;
+    private String partnerExtId;
 
     public TaskEntity() {
     }
@@ -85,12 +85,12 @@ public class TaskEntity {
     }
 
     @Column(name = "partner_ext_id", nullable = false)
-    public String getPartnerUid() {
-        return partnerUid;
+    public String getPartnerExtId() {
+        return partnerExtId;
     }
 
-    public TaskEntity setPartnerUid(String partnerUid) {
-        this.partnerUid = partnerUid;
+    public TaskEntity setPartnerExtId(String partnerExtId) {
+        this.partnerExtId = partnerExtId;
         return this;
     }
 

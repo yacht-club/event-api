@@ -6,7 +6,6 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.*;
 import java.time.Instant;
-import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -21,7 +20,7 @@ public class EventEntity {
     private Instant timeFromMillis;
     private Instant timeTillMillis;
     private String place;
-    private UUID ownerUid;
+    private UUID ownerExtId;
 
     public EventEntity() {
     }
@@ -105,13 +104,13 @@ public class EventEntity {
         return this;
     }
 
-    @Column(name = "owner_external_id", nullable = false)
-    public UUID getOwnerUid() {
-        return ownerUid;
+    @Column(name = "owner_ext_id", nullable = false)
+    public UUID getOwnerExtId() {
+        return ownerExtId;
     }
 
-    public EventEntity setOwnerUid(UUID ownerUid) {
-        this.ownerUid = ownerUid;
+    public EventEntity setOwnerExtId(UUID ownerExtId) {
+        this.ownerExtId = ownerExtId;
         return this;
     }
 

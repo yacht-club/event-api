@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public interface EventService {
 
-    List<EventInfo> getAllEvents();
+    List<EventInfo> getAllEvents(String name);
 
     EventInfo getEvent(UUID eventUid);
 

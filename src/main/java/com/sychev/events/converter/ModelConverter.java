@@ -1,7 +1,6 @@
 package com.sychev.events.converter;
 
 
-import com.sychev.events.exception.NotFoundEventException;
 import com.sychev.events.model.entity.EventEntity;
 import com.sychev.events.model.entity.RelEventPartnersEntity;
 import com.sychev.events.model.entity.TaskEntity;
@@ -10,8 +9,6 @@ import com.sychev.events.model.request.AddTaskRequest;
 import com.sychev.events.model.request.LinkEventWithPartnerRequest;
 import com.sychev.events.model.response.EventInfo;
 import com.sychev.events.model.response.TaskInfo;
-import com.sychev.events.repository.EventRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.UUID;
 
@@ -27,7 +24,7 @@ public class ModelConverter {
                 entity.getTimeFromMillis(),
                 entity.getTimeTillMillis(),
                 entity.getPlace(),
-                entity.getOwnerUid()
+                entity.getOwnerExtId()
         );
     }
 
@@ -38,7 +35,7 @@ public class ModelConverter {
                 entity.getDescription(),
                 entity.getDeadlineTime(),
                 entity.getResponsiblePrsUid(),
-                entity.getPartnerUid()
+                entity.getPartnerExtId()
         );
     }
 
@@ -49,7 +46,7 @@ public class ModelConverter {
                 .setDateTillMillis(request.getDateTillMillis())
                 .setDescription(request.getDescription())
                 .setPlace(request.getPlace())
-                .setOwnerUid(request.getOwnerUid())
+                .setOwnerExtId(request.getOwnerExtId())
                 .setTimeFromMillis(request.getTimeFromMillis())
                 .setTimeTillMillis(request.getTimeTillMillis());
 
@@ -59,8 +56,8 @@ public class ModelConverter {
         return new TaskEntity()
                 .setName(request.getName())
                 .setDescription(request.getDescription())
-                .setPartnerUid(request.getPartnerUid())
-                .setResponsiblePrsUid(request.getResponsiblePrsUid())
+                .setPartnerExtId(request.getPartnerExtId())
+                .setResponsiblePrsUid(request.getPrsExtId())
                 .setDeadlineTime(request.getDeadlineTime());
 
     }

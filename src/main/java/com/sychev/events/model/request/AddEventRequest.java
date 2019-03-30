@@ -1,22 +1,18 @@
 package com.sychev.events.model.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.Instant;
 import java.util.UUID;
 
 public class AddEventRequest {
 
-    @NotBlank
-    @ApiModelProperty(example = "Name")
+    @NotNull
     private String name;
 
-    @NotBlank
-    @ApiModelProperty(example = "Description")
+    @NotNull
     private String description;
 
     @NotNull
@@ -31,12 +27,11 @@ public class AddEventRequest {
     @NotNull
     private Instant timeTillMillis;
 
-    @NotBlank
-    @ApiModelProperty(example = "Place")
+    @NotNull
     private String place;
 
     @NotNull
-    private UUID ownerUid;
+    private UUID ownerExtId;
 
     public AddEventRequest(
             @JsonProperty("name") String name,
@@ -46,7 +41,7 @@ public class AddEventRequest {
             @JsonProperty("timeFromMillis") Instant timeFromMillis,
             @JsonProperty("timeTillMillis") Instant timeTillMillis,
             @JsonProperty("place") String place,
-            @JsonProperty("ownerUid") UUID ownerUid) {
+            @JsonProperty("ownerExtId") UUID ownerExtId) {
         this.name = name;
         this.description = description;
         this.dateFromMillis = dateFromMillis;
@@ -54,7 +49,7 @@ public class AddEventRequest {
         this.timeFromMillis = timeFromMillis;
         this.timeTillMillis = timeTillMillis;
         this.place = place;
-        this.ownerUid = ownerUid;
+        this.ownerExtId = ownerExtId;
     }
 
     public String getName() {
@@ -85,8 +80,8 @@ public class AddEventRequest {
         return place;
     }
 
-    public UUID getOwnerUid() {
-        return ownerUid;
+    public UUID getOwnerExtId() {
+        return ownerExtId;
     }
 
     @Override

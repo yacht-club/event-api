@@ -11,22 +11,22 @@ public class TaskInfo {
     private String name;
     private String description;
     private Instant timeTillMillis;
-    private String responsiblePrsUid;
-    private String partnerUid;
+    private String prsExtId;
+    private String partnerExtId;
 
     public TaskInfo(
             UUID taskUid,
             String name,
             String description,
             Instant timeTillMillis,
-            String responsiblePrsUid,
-            String partnerUid) {
+            String prsExtId,
+            String partnerExtId) {
         this.taskUid = taskUid;
         this.name = name;
         this.description = description;
         this.timeTillMillis = timeTillMillis;
-        this.responsiblePrsUid = responsiblePrsUid;
-        this.partnerUid = partnerUid;
+        this.prsExtId = prsExtId;
+        this.partnerExtId = partnerExtId;
     }
 
     @JsonGetter("taskUid")
@@ -49,13 +49,13 @@ public class TaskInfo {
         return timeTillMillis;
     }
 
-    @JsonGetter("responsible_prs_uid")
-    public String responsiblePrsUid() {
-        return responsiblePrsUid;
+    @JsonGetter("prsExtId")
+    public String getPrsExtId() {
+        return prsExtId;
     }
 
-    @JsonGetter("partner_uid")
-    public String partnerUid() {
-        return partnerUid;
+    @JsonGetter("partnerExtId")
+    public String getPartnerExtId() {
+        return partnerExtId;
     }
 }

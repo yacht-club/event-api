@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public class EventInfo {
 
-    private UUID eventUid = UUID.randomUUID();
+    private UUID eventUid;
     private String name;
     private String description;
     private Instant dateFromMillis;
@@ -15,7 +15,7 @@ public class EventInfo {
     private Instant timeFromMillis;
     private Instant timeTillMillis;
     private String place;
-    private UUID ownerUid;
+    private String ownerExtId;
 
     public EventInfo(
             UUID eventUid,
@@ -26,7 +26,7 @@ public class EventInfo {
             Instant timeFromMillis,
             Instant timeTillMillis,
             String place,
-            UUID ownerUid) {
+            String ownerExtId) {
         this.eventUid = eventUid;
         this.name = name;
         this.description = description;
@@ -35,7 +35,7 @@ public class EventInfo {
         this.timeFromMillis = timeFromMillis;
         this.timeTillMillis = timeTillMillis;
         this.place = place;
-        this.ownerUid = ownerUid;
+        this.ownerExtId = ownerExtId;
     }
 
     @JsonGetter("eventUid")
@@ -78,8 +78,8 @@ public class EventInfo {
         return place;
     }
 
-    @JsonGetter("ownerUid")
-    public UUID getOwnerUid() {
-        return ownerUid;
+    @JsonGetter("ownerExtId")
+    public String getOwnerExtId() {
+        return ownerExtId;
     }
 }

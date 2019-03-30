@@ -1,43 +1,38 @@
 package com.sychev.events.model.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.Instant;
 
 public class AddTaskRequest {
 
-    @NotBlank
-    @ApiModelProperty(example = "Name")
+    @NotNull
     private String name;
 
-    @NotBlank
-    @ApiModelProperty(example = "Description")
+    @NotNull
     private String description;
 
     @NotNull
     private Instant deadlineTime;
 
     @NotNull
-    private String responsiblePrsUid;
+    private String prsExtId;
 
-    @NotNull
-    private String partnerUid;
+    private String partnerExtId;
 
     public AddTaskRequest(
             @JsonProperty("name") String name,
             @JsonProperty("description") String description,
             @JsonProperty("deadlineTime") Instant deadlineTime,
-            @JsonProperty("responsiblePrsUid") String responsiblePrsUid,
-            @JsonProperty("partnerUid") String partnerUid) {
+            @JsonProperty("prsExtId") String prsExtId,
+            @JsonProperty("partnerExtId") String partnerExtId) {
         this.name = name;
         this.description = description;
         this.deadlineTime = deadlineTime;
-        this.responsiblePrsUid = responsiblePrsUid;
-        this.partnerUid = partnerUid;
+        this.prsExtId = prsExtId;
+        this.partnerExtId = partnerExtId;
     }
 
     public String getName() {
@@ -52,12 +47,12 @@ public class AddTaskRequest {
         return deadlineTime;
     }
 
-    public String getResponsiblePrsUid() {
-        return responsiblePrsUid;
+    public String getPrsExtId() {
+        return prsExtId;
     }
 
-    public String getPartnerUid() {
-        return partnerUid;
+    public String getPartnerExtId() {
+        return partnerExtId;
     }
 
     @Override

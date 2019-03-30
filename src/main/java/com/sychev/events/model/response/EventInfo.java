@@ -79,7 +79,7 @@ public class EventInfo implements Comparable {
     public int compareTo(Object o) {
         if (o instanceof EventInfo) {
             EventInfo event = (EventInfo) o;
-            return this.dateFromMillis.getNano() - event.dateFromMillis.getNano();
+            return event.dateFromMillis.getNano() - this.dateFromMillis.getNano();
         }
         return 0;
     }

@@ -2,18 +2,17 @@ package com.sychev.events.service.impl;
 
 import com.sychev.events.converter.ModelConverter;
 import com.sychev.events.exception.NotFoundEventException;
-import com.sychev.events.exception.NotFoundHistoriesException;
 import com.sychev.events.model.entity.EventEntity;
 import com.sychev.events.model.request.AddEventRequest;
 import com.sychev.events.model.request.AddHistoryRequest;
 import com.sychev.events.model.request.LinkEventWithPartnerRequest;
 import com.sychev.events.model.response.CommunicationHistoryInfo;
 import com.sychev.events.model.response.EventInfo;
+import com.sychev.events.model.response.EventPartnerInfo;
 import com.sychev.events.repository.CommunicationHistoryRepository;
 import com.sychev.events.repository.EventRepository;
 import com.sychev.events.repository.RelEventPartnersRepository;
 import com.sychev.events.service.EventService;
-import io.swagger.models.Model;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,6 +103,18 @@ public class EventServiceImpl implements EventService {
         });
 
         relRepository.save(ModelConverter.convert(request, event));
+    }
+
+    @Override
+    public List<EventPartnerInfo> getPartnersByEvent(UUID eventUid) {
+        EventEntity event = eventRepository.findByEventUid(eventUid).orElseThrow(() -> {
+            logger.info("Not found event with uid: " + eventUid);
+            return new NotFoundEventException("Not found event with uid: " + eventUid);
+        });
+
+        return relRepository.findAllByEvent(event).stream()
+                .map(ModelConverter::convert)
+                .collect(Collectors.toList());
     }
 
     @Override

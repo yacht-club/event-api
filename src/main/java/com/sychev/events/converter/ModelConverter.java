@@ -10,6 +10,7 @@ import com.sychev.events.model.request.AddTaskRequest;
 import com.sychev.events.model.request.LinkEventWithPartnerRequest;
 import com.sychev.events.model.response.CommunicationHistoryInfo;
 import com.sychev.events.model.response.EventInfo;
+import com.sychev.events.model.response.EventPartnerInfo;
 import com.sychev.events.model.response.TaskInfo;
 
 import java.util.UUID;
@@ -83,5 +84,9 @@ public class ModelConverter {
                 commHistory.getChannel(),
                 commHistory.getComment()
         );
+    }
+
+    public static EventPartnerInfo convert(RelEventPartnersEntity entity) {
+        return new EventPartnerInfo(entity.getPartnerUid());
     }
 }

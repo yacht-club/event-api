@@ -1,7 +1,9 @@
 package com.sychev.events.controller;
 
 import com.sychev.events.model.request.AddEventRequest;
+import com.sychev.events.model.request.LinkEventWithPartnerRequest;
 import com.sychev.events.model.response.EventInfo;
+import com.sychev.events.model.response.EventPartnerInfo;
 import com.sychev.events.service.EventService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +37,15 @@ public class EventController {
         return ResponseEntity.ok(eventService.getAllEvents(name));
     }
 
+    @GetMapping("{eventUid}/partners")
+    public ResponseEntity<List<EventPartnerInfo>> getAllPartnersByEvent(
+            @PathVariable(name = "eventUid") UUID eventUid) {
+
+        logger.debug("Getting all partners by event with uid: {}", eventUid);
+
+        return ResponseEntity.ok(eventService.getPartnersByEvent(eventUid));
+    }
+
     @GetMapping("/archive")
     public ResponseEntity<List<EventInfo>> getAllArchiveEvents(
             @RequestParam(name = "name", required = false) String name) {
@@ -56,6 +67,14 @@ public class EventController {
         logger.debug("Adding event with name: {}", request.getName());
 
         return ResponseEntity.ok(eventService.addEvent(request));
+    }
+
+    @PostMapping(value = "/link", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<Void> linkEventWithPartner(@RequestBody @Valid LinkEventWithPartnerRequest request) {
+        logger.debug("Linking event with uid: {} and partner: {}", request.getEventUid(), request.getPartnerExtId());
+
+        eventService.linkEventWithPartner(request);
+        return ResponseEntity.ok().build();
     }
 
 }

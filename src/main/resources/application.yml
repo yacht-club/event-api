@@ -18,9 +18,9 @@ spring:
 
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: "jdbc:postgresql://ec2-54-246-121-32.eu-west-1.compute.amazonaws.com/de1i7r1tk47278?sslmode=require&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"
-    username: zhjidbjtviiygs
-    password: "7f014fcf757bfb60fc49b8dd9f924bc3857dc98513e2efb3ae38cf3b064287e9"
+    url: "jdbc:postgresql://ec2-54-247-70-127.eu-west-1.compute.amazonaws.com/db72olrhq6vi5k?sslmode=require&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"
+      username: fthlzewmqqaaed
+      password: "9248f7a0e88d8893f1870e05fef34f53a636e6ebccef10aa5ff6e097d2d1a9c0"
 
 event:
   web:
@@ -37,3 +37,5 @@ event:
       - https://localhost:3000
       - http://localhost:8080
       - https://localhost:8080
+
+

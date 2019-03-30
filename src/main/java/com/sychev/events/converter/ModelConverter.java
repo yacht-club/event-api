@@ -1,13 +1,14 @@
 package com.sychev.events.converter;
 
-import com.sychev.events.model.TaskEnum;
+import com.sychev.events.model.entity.CommunicationHistoryEntity;
 import com.sychev.events.model.entity.EventEntity;
 import com.sychev.events.model.entity.RelEventPartnersEntity;
 import com.sychev.events.model.entity.TaskEntity;
 import com.sychev.events.model.request.AddEventRequest;
+import com.sychev.events.model.request.AddHistoryRequest;
 import com.sychev.events.model.request.AddTaskRequest;
 import com.sychev.events.model.request.LinkEventWithPartnerRequest;
-import com.sychev.events.model.request.UpdateTaskRequest;
+import com.sychev.events.model.response.CommunicationHistoryInfo;
 import com.sychev.events.model.response.EventInfo;
 import com.sychev.events.model.response.TaskInfo;
 
@@ -65,5 +66,22 @@ public class ModelConverter {
         return new RelEventPartnersEntity()
                 .setPartnerUid(UUID.fromString(request.getPartnerExtId()))
                 .setEvent(eventEntity);
+    }
+
+    public static CommunicationHistoryEntity convert(AddHistoryRequest request, EventEntity event) {
+        return new CommunicationHistoryEntity()
+                .setChannel(request.getChannel())
+                .setComment(request.getComment())
+                .setEvent(event)
+                .setPartnerExtId(UUID.fromString(request.getPartnerExtId()));
+    }
+
+    public static CommunicationHistoryInfo convert(CommunicationHistoryEntity commHistory) {
+        return new CommunicationHistoryInfo(
+                commHistory.getEvent(),
+                commHistory.getPartnerExtId(),
+                commHistory.getChannel(),
+                commHistory.getComment()
+        );
     }
 }

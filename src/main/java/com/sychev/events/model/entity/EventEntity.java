@@ -20,7 +20,6 @@ public class EventEntity {
     private Instant timeFromMillis;
     private Instant timeTillMillis;
     private String place;
-    private String ownerExtId;
 
     public EventEntity() {
     }
@@ -74,7 +73,7 @@ public class EventEntity {
         return this;
     }
 
-    @Column(name = "time_from", nullable = false)
+    @Column(name = "time_from")
     public Instant getTimeFromMillis() {
         return timeFromMillis;
     }
@@ -84,7 +83,7 @@ public class EventEntity {
         return this;
     }
 
-    @Column(name = "time_till", nullable = false)
+    @Column(name = "time_till")
     public Instant getTimeTillMillis() {
         return timeTillMillis;
     }
@@ -101,16 +100,6 @@ public class EventEntity {
 
     public EventEntity setPlace(String place) {
         this.place = place;
-        return this;
-    }
-
-    @Column(name = "owner_ext_id", nullable = false)
-    public String getOwnerExtId() {
-        return ownerExtId;
-    }
-
-    public EventEntity setOwnerExtId(String ownerExtId) {
-        this.ownerExtId = ownerExtId;
         return this;
     }
 

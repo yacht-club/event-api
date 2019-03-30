@@ -22,8 +22,7 @@ public class ModelConverter {
                 entity.getDateTillMillis(),
                 entity.getTimeFromMillis(),
                 entity.getTimeTillMillis(),
-                entity.getPlace(),
-                entity.getOwnerExtId());
+                entity.getPlace());
     }
 
     public static TaskInfo convert(TaskEntity entity) {
@@ -32,7 +31,7 @@ public class ModelConverter {
                 entity.getName(),
                 entity.getDescription(),
                 entity.getDeadlineTime(),
-                entity.getResponsiblePrsUid(),
+                entity.getPrsExtId(),
                 entity.getPartnerExtId());
     }
 
@@ -43,7 +42,6 @@ public class ModelConverter {
                 .setDateTillMillis(request.getDateTillMillis())
                 .setDescription(request.getDescription())
                 .setPlace(request.getPlace())
-                .setOwnerExtId(request.getOwnerExtId())
                 .setTimeFromMillis(request.getTimeFromMillis())
                 .setTimeTillMillis(request.getTimeTillMillis());
     }
@@ -53,7 +51,7 @@ public class ModelConverter {
                 .setName(request.getName())
                 .setDescription(request.getDescription())
                 .setPartnerExtId(request.getPartnerExtId())
-                .setResponsiblePrsUid(request.getPrsExtId())
+                .setprsExtId(request.getPrsExtId())
                 .setDeadlineTime(request.getDeadlineTime());
 
     }

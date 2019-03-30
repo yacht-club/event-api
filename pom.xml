@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.sychev</groupId>
-    <artifactId>event-api</artifactId>
+    <artifactId>task-api</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <parent>

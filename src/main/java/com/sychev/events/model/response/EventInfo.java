@@ -15,7 +15,6 @@ public class EventInfo {
     private Instant timeFromMillis;
     private Instant timeTillMillis;
     private String place;
-    private String ownerExtId;
 
     public EventInfo(
             UUID eventUid,
@@ -25,8 +24,7 @@ public class EventInfo {
             Instant dateTillMillis,
             Instant timeFromMillis,
             Instant timeTillMillis,
-            String place,
-            String ownerExtId) {
+            String place) {
         this.eventUid = eventUid;
         this.name = name;
         this.description = description;
@@ -35,7 +33,6 @@ public class EventInfo {
         this.timeFromMillis = timeFromMillis;
         this.timeTillMillis = timeTillMillis;
         this.place = place;
-        this.ownerExtId = ownerExtId;
     }
 
     @JsonGetter("eventUid")
@@ -76,10 +73,5 @@ public class EventInfo {
     @JsonGetter("place")
     public String getPlace() {
         return place;
-    }
-
-    @JsonGetter("ownerExtId")
-    public String getOwnerExtId() {
-        return ownerExtId;
     }
 }

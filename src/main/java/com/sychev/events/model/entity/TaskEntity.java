@@ -4,10 +4,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.Instant;
 import java.util.UUID;
 
@@ -18,8 +15,9 @@ public class TaskEntity {
     private UUID taskUid = UUID.randomUUID();
     private String name;
     private String description;
-    private String responsiblePrsUid;
+    private String prsExtId;
     private Instant deadlineTime;
+    private EventEntity event;
     private String partnerExtId;
 
     public TaskEntity() {
@@ -65,12 +63,12 @@ public class TaskEntity {
     }
 
     @Column(name = "prs_ext_id", nullable = false)
-    public String getResponsiblePrsUid() {
-        return responsiblePrsUid;
+    public String getPrsExtId() {
+        return prsExtId;
     }
 
-    public TaskEntity setResponsiblePrsUid(String responsiblePrsUid) {
-        this.responsiblePrsUid = responsiblePrsUid;
+    public TaskEntity setprsExtId(String prsExtId) {
+        this.prsExtId = prsExtId;
         return this;
     }
 
@@ -84,7 +82,7 @@ public class TaskEntity {
         return this;
     }
 
-    @Column(name = "partner_ext_id", nullable = false)
+    @Column(name = "partner_ext_id")
     public String getPartnerExtId() {
         return partnerExtId;
     }
@@ -92,6 +90,16 @@ public class TaskEntity {
     public TaskEntity setPartnerExtId(String partnerExtId) {
         this.partnerExtId = partnerExtId;
         return this;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "event_id")
+    public EventEntity getEvent() {
+        return event;
+    }
+
+    public void setEvent(EventEntity event) {
+        this.event = event;
     }
 
     @Override

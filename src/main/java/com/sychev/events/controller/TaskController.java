@@ -1,6 +1,7 @@
 package com.sychev.events.controller;
 
 import com.sychev.events.model.request.AddTaskRequest;
+import com.sychev.events.model.request.LinkTaskWithPartnerRequest;
 import com.sychev.events.model.response.TaskInfo;
 import com.sychev.events.service.TaskService;
 import org.slf4j.Logger;
@@ -40,11 +41,33 @@ public class TaskController {
         return ResponseEntity.ok(taskService.getTask(taskUid));
     }
 
+    @GetMapping("/event/{eventUid}")
+    public ResponseEntity<List<TaskInfo>> getTasksByEvent(@PathVariable UUID eventUid) {
+        logger.debug("Getting tasks by event uid: {} ", eventUid);
+
+        return ResponseEntity.ok(taskService.getAllTasksByEvent(eventUid));
+    }
+
+    @GetMapping("/person/{prsExtId}")
+    public ResponseEntity<List<TaskInfo>> getTasksByPrsExtId(@PathVariable String prsExtId) {
+        logger.debug("Getting tasks by person with external id: {} ", prsExtId);
+
+        return ResponseEntity.ok(taskService.getAllTasksByPrsExtId(prsExtId));
+    }
+
     @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<UUID> addTask(@RequestBody @Valid AddTaskRequest request) {
         logger.debug("Adding task with name: {}", request.getName());
 
         return ResponseEntity.ok(taskService.addTask(request));
+    }
+
+    @PostMapping(value = "/link", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<Void> linkTaskAndPartner(@RequestBody @Valid LinkTaskWithPartnerRequest request) {
+        logger.debug("Linking task with uid: {} and person with uid: {}", request.getTaskUid(), request.getPartnerExtId());
+
+        taskService.linkTaskWithPartner(request);
+        return ResponseEntity.ok().build();
     }
 
 }

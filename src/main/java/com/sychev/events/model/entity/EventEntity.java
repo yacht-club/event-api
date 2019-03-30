@@ -15,6 +15,7 @@ import java.util.UUID;
 @Table(name = "events", schema = "events")
 public class EventEntity {
     private Integer id;
+    private UUID eventUid = UUID.randomUUID();
     private String name;
     private String description;
     private Instant dateFromMillis;
@@ -41,8 +42,9 @@ public class EventEntity {
         return name;
     }
 
-    public void setName(String name) {
+    public EventEntity setName(String name) {
         this.name = name;
+        return this;
     }
 
     @Column(name = "description", nullable = false)
@@ -50,8 +52,9 @@ public class EventEntity {
         return description;
     }
 
-    public void setDescription(String description) {
+    public EventEntity setDescription(String description) {
         this.description = description;
+        return this;
     }
 
     @Column(name = "date_from", nullable = false)
@@ -59,8 +62,9 @@ public class EventEntity {
         return dateFromMillis;
     }
 
-    public void setDateFromMillis(Instant dateFromMillis) {
+    public EventEntity setDateFromMillis(Instant dateFromMillis) {
         this.dateFromMillis = dateFromMillis;
+        return this;
     }
 
     @Column(name = "date_till", nullable = false)
@@ -68,8 +72,9 @@ public class EventEntity {
         return dateTillMillis;
     }
 
-    public void setDateTillMillis(Instant dateTillMillis) {
+    public EventEntity setDateTillMillis(Instant dateTillMillis) {
         this.dateTillMillis = dateTillMillis;
+        return this;
     }
 
     @Column(name = "time_from", nullable = false)
@@ -77,8 +82,9 @@ public class EventEntity {
         return timeFromMillis;
     }
 
-    public void setTimeFromMillis(Instant timeFromMillis) {
+    public EventEntity setTimeFromMillis(Instant timeFromMillis) {
         this.timeFromMillis = timeFromMillis;
+        return this;
     }
 
     @Column(name = "time_till", nullable = false)
@@ -86,8 +92,9 @@ public class EventEntity {
         return timeTillMillis;
     }
 
-    public void setTimeTillMillis(Instant timeTillMillis) {
+    public EventEntity setTimeTillMillis(Instant timeTillMillis) {
         this.timeTillMillis = timeTillMillis;
+        return this;
     }
 
     @Column(name = "place", length = 50, nullable = false)
@@ -95,8 +102,9 @@ public class EventEntity {
         return place;
     }
 
-    public void setPlace(String place) {
+    public EventEntity setPlace(String place) {
         this.place = place;
+        return this;
     }
 
     @Column(name = "owner_uid", nullable = false)
@@ -104,8 +112,19 @@ public class EventEntity {
         return ownerUid;
     }
 
-    public void setOwnerUid(UUID ownerUid) {
+    public EventEntity setOwnerUid(UUID ownerUid) {
         this.ownerUid = ownerUid;
+        return this;
+    }
+
+    @Column(name = "event_uid", nullable = false)
+    public UUID getEventUid() {
+        return eventUid;
+    }
+
+    public EventEntity setEventUid(UUID eventUid) {
+        this.eventUid = eventUid;
+        return this;
     }
 
     @Override
@@ -122,4 +141,6 @@ public class EventEntity {
     public int hashCode() {
         return HashCodeBuilder.reflectionHashCode(this);
     }
+
+
 }

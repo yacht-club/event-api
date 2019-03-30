@@ -35,6 +35,15 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public List<EventInfo> getAllEvents(String name) {
+        if (name != null) {
+            return getByName(name);
+        }
+        return eventRepository.findAll().stream()
+                .map(ModelConverter::convert)
+                .collect(Collectors.toList());
+    }
+
+    private List<EventInfo> getByName(String name) {
         return eventRepository.findAll().stream()
                 .filter(eventEntity -> eventEntity.getName().contains(name))
                 .map(ModelConverter::convert)

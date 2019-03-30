@@ -25,6 +25,7 @@ public class EventEntity {
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     public Integer getId() {
         return id;
     }

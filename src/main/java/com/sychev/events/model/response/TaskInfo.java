@@ -1,6 +1,8 @@
 package com.sychev.events.model.response;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
+import com.sychev.events.model.TaskEnum;
+import com.sychev.events.model.entity.EventEntity;
 
 import java.time.Instant;
 import java.util.UUID;
@@ -10,27 +12,33 @@ public class TaskInfo {
     private UUID taskUid;
     private String name;
     private String description;
-    private Instant timeTillMillis;
     private String prsExtId;
+    private Instant deadlineTime;
+    private EventEntity event;
     private String partnerExtId;
+    private TaskEnum status;
 
     public TaskInfo(
             UUID taskUid,
             String name,
             String description,
-            Instant timeTillMillis,
             String prsExtId,
-            String partnerExtId) {
+            String partnerExtId,
+            Instant deadlineTime,
+            EventEntity event,
+            TaskEnum status) {
         this.taskUid = taskUid;
         this.name = name;
         this.description = description;
-        this.timeTillMillis = timeTillMillis;
         this.prsExtId = prsExtId;
         this.partnerExtId = partnerExtId;
+        this.deadlineTime = deadlineTime;
+        this.event = event;
+        this.status = status;
     }
 
     @JsonGetter("taskUid")
-    public UUID getEventUid() {
+    public UUID getTaskUid() {
         return taskUid;
     }
 
@@ -44,11 +52,6 @@ public class TaskInfo {
         return description;
     }
 
-    @JsonGetter("timeTillMillis")
-    public Instant getTimeTillMillis() {
-        return timeTillMillis;
-    }
-
     @JsonGetter("prsExtId")
     public String getPrsExtId() {
         return prsExtId;
@@ -57,5 +60,20 @@ public class TaskInfo {
     @JsonGetter("partnerExtId")
     public String getPartnerExtId() {
         return partnerExtId;
+    }
+
+    @JsonGetter("deadlineTime")
+    public Instant getDeadlineTime() {
+        return deadlineTime;
+    }
+
+    @JsonGetter("event")
+    public EventEntity getEvent() {
+        return event;
+    }
+
+    @JsonGetter("status")
+    public TaskEnum getStatus() {
+        return status;
     }
 }

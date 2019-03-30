@@ -2,6 +2,7 @@ package com.sychev.events.controller;
 
 import com.sychev.events.model.request.AddTaskRequest;
 import com.sychev.events.model.request.LinkTaskWithPartnerRequest;
+import com.sychev.events.model.request.UpdateTaskRequest;
 import com.sychev.events.model.response.TaskInfo;
 import com.sychev.events.service.TaskService;
 import org.slf4j.Logger;
@@ -67,6 +68,14 @@ public class TaskController {
         logger.debug("Linking task with uid: {} and person with uid: {}", request.getTaskUid(), request.getPartnerExtId());
 
         taskService.linkTaskWithPartner(request);
+        return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping
+    public ResponseEntity<Void> updateTask(@RequestBody @Valid UpdateTaskRequest request) {
+        logger.debug("Updating task with uid: {}", request.getTaskUid());
+
+        taskService.updateTask(request);
         return ResponseEntity.ok().build();
     }
 

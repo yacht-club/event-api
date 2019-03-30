@@ -1,10 +1,12 @@
 package com.sychev.events.model.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sychev.events.model.entity.EventEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.validation.constraints.NotNull;
 import java.time.Instant;
+import java.util.UUID;
 
 public class AddTaskRequest {
 
@@ -22,17 +24,21 @@ public class AddTaskRequest {
 
     private String partnerExtId;
 
+    private UUID eventUid;
+
     public AddTaskRequest(
             @JsonProperty("name") String name,
             @JsonProperty("description") String description,
             @JsonProperty("deadlineTime") Instant deadlineTime,
             @JsonProperty("prsExtId") String prsExtId,
-            @JsonProperty("partnerExtId") String partnerExtId) {
+            @JsonProperty("partnerExtId") String partnerExtId,
+            @JsonProperty("eventUid") UUID eventUid) {
         this.name = name;
         this.description = description;
         this.deadlineTime = deadlineTime;
         this.prsExtId = prsExtId;
         this.partnerExtId = partnerExtId;
+        this.eventUid = eventUid;
     }
 
     public String getName() {
@@ -53,6 +59,10 @@ public class AddTaskRequest {
 
     public String getPartnerExtId() {
         return partnerExtId;
+    }
+
+    public UUID getEventUid() {
+        return eventUid;
     }
 
     @Override

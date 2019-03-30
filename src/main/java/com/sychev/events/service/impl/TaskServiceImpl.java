@@ -7,6 +7,7 @@ import com.sychev.events.model.entity.EventEntity;
 import com.sychev.events.model.entity.TaskEntity;
 import com.sychev.events.model.request.AddTaskRequest;
 import com.sychev.events.model.request.LinkTaskWithPartnerRequest;
+import com.sychev.events.model.request.UpdateTaskRequest;
 import com.sychev.events.model.response.TaskInfo;
 import com.sychev.events.repository.EventRepository;
 import com.sychev.events.repository.TaskRepository;
@@ -71,7 +72,16 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public UUID addTask(AddTaskRequest request) {
-        return taskRepository.save(ModelConverter.convert(request)).getTaskUid();
+        EventEntity event = eventRepository.findByEventUid(request.getEventUid()).orElseThrow(() -> {
+            logger.info("Not found event with uid: " + request.getEventUid());
+            return new NotFoundEventException("Not found event with uid: " + request.getEventUid());
+        });
+
+        TaskEntity task = ModelConverter.convert(request);
+
+        task.setEvent(event);
+
+        return taskRepository.save(task).getTaskUid();
     }
 
     @Override
@@ -82,6 +92,19 @@ public class TaskServiceImpl implements TaskService {
         });
 
         task.setPartnerExtId(request.getPartnerExtId());
+
+        taskRepository.save(task);
+    }
+
+    @Override
+    public void updateTask(UpdateTaskRequest request) {
+
+        TaskEntity task = taskRepository.findByTaskUid(request.getTaskUid()).orElseThrow(() -> {
+            logger.info("Not found task with uid: " + request.getTaskUid());
+            return new NotFoundTaskException("Not found task with uid: " + request.getTaskUid());
+        });
+
+        task.setStatus(request.getStatus());
 
         taskRepository.save(task);
     }

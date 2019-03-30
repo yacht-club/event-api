@@ -19,18 +19,13 @@ public class AddEventRequest {
 
     @NotNull
     private Instant dateTillMillis;
-
-    @NotNull
+    
     private Instant timeFromMillis;
 
-    @NotNull
     private Instant timeTillMillis;
 
     @NotNull
     private String place;
-
-    @NotNull
-    private String ownerExtId;
 
     public AddEventRequest(
             @JsonProperty("name") String name,
@@ -39,8 +34,7 @@ public class AddEventRequest {
             @JsonProperty("dateTillMillis") Instant dateTillMillis,
             @JsonProperty("timeFromMillis") Instant timeFromMillis,
             @JsonProperty("timeTillMillis") Instant timeTillMillis,
-            @JsonProperty("place") String place,
-            @JsonProperty("ownerExtId") String ownerExtId) {
+            @JsonProperty("place") String place) {
         this.name = name;
         this.description = description;
         this.dateFromMillis = dateFromMillis;
@@ -48,7 +42,6 @@ public class AddEventRequest {
         this.timeFromMillis = timeFromMillis;
         this.timeTillMillis = timeTillMillis;
         this.place = place;
-        this.ownerExtId = ownerExtId;
     }
 
     public String getName() {
@@ -77,10 +70,6 @@ public class AddEventRequest {
 
     public String getPlace() {
         return place;
-    }
-
-    public String getOwnerExtId() {
-        return ownerExtId;
     }
 
     @Override

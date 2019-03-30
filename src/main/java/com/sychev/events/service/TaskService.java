@@ -3,6 +3,7 @@ package com.sychev.events.service;
 import com.sychev.events.model.request.AddTaskRequest;
 import com.sychev.events.model.request.LinkEventWithPartnerRequest;
 import com.sychev.events.model.request.LinkTaskWithPartnerRequest;
+import com.sychev.events.model.request.UpdateTaskRequest;
 import com.sychev.events.model.response.TaskInfo;
 
 import java.util.List;
@@ -21,4 +22,6 @@ public interface TaskService {
     UUID addTask(AddTaskRequest request);
 
     void linkTaskWithPartner(LinkTaskWithPartnerRequest request);
+
+    void updateTask(UpdateTaskRequest request);
 }

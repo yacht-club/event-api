@@ -1,5 +1,6 @@
 package com.sychev.events.model.entity;
 
+import com.sychev.events.model.TaskEnum;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -19,11 +20,13 @@ public class TaskEntity {
     private Instant deadlineTime;
     private EventEntity event;
     private String partnerExtId;
+    private TaskEnum status = TaskEnum.CREATED;
 
     public TaskEntity() {
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     public Integer getId() {
         return id;
     }
@@ -67,7 +70,7 @@ public class TaskEntity {
         return prsExtId;
     }
 
-    public TaskEntity setprsExtId(String prsExtId) {
+    public TaskEntity setPrsExtId(String prsExtId) {
         this.prsExtId = prsExtId;
         return this;
     }
@@ -98,8 +101,20 @@ public class TaskEntity {
         return event;
     }
 
-    public void setEvent(EventEntity event) {
+    public TaskEntity setEvent(EventEntity event) {
         this.event = event;
+        return this;
+    }
+
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "status")
+    public TaskEnum getStatus() {
+        return status;
+    }
+
+    public TaskEntity setStatus(TaskEnum status) {
+        this.status = status;
+        return this;
     }
 
     @Override
@@ -115,5 +130,17 @@ public class TaskEntity {
     @Override
     public int hashCode() {
         return HashCodeBuilder.reflectionHashCode(this);
+    }
+
+    public TaskEntity copy(TaskEntity entity) {
+        this.name = entity.name;
+        this.deadlineTime = entity.deadlineTime;
+        this.description = entity.description;
+        this.event = entity.event;
+        this.partnerExtId = entity.partnerExtId;
+        this.prsExtId = entity.prsExtId;
+        this.status = entity.status;
+        this.taskUid = entity.taskUid;
+        return this;
     }
 }

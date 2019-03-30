@@ -1,11 +1,13 @@
 package com.sychev.events.converter;
 
+import com.sychev.events.model.TaskEnum;
 import com.sychev.events.model.entity.EventEntity;
 import com.sychev.events.model.entity.RelEventPartnersEntity;
 import com.sychev.events.model.entity.TaskEntity;
 import com.sychev.events.model.request.AddEventRequest;
 import com.sychev.events.model.request.AddTaskRequest;
 import com.sychev.events.model.request.LinkEventWithPartnerRequest;
+import com.sychev.events.model.request.UpdateTaskRequest;
 import com.sychev.events.model.response.EventInfo;
 import com.sychev.events.model.response.TaskInfo;
 
@@ -30,9 +32,12 @@ public class ModelConverter {
                 entity.getTaskUid(),
                 entity.getName(),
                 entity.getDescription(),
-                entity.getDeadlineTime(),
                 entity.getPrsExtId(),
-                entity.getPartnerExtId());
+                entity.getPartnerExtId(),
+                entity.getDeadlineTime(),
+                entity.getEvent(),
+                entity.getStatus()
+                );
     }
 
     public static EventEntity convert(AddEventRequest request) {
@@ -51,7 +56,7 @@ public class ModelConverter {
                 .setName(request.getName())
                 .setDescription(request.getDescription())
                 .setPartnerExtId(request.getPartnerExtId())
-                .setprsExtId(request.getPrsExtId())
+                .setPrsExtId(request.getPrsExtId())
                 .setDeadlineTime(request.getDeadlineTime());
 
     }

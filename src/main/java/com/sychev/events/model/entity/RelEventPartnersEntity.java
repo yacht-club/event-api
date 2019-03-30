@@ -19,6 +19,7 @@ public class RelEventPartnersEntity {
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     public Integer getId() {
         return id;
     }

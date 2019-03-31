@@ -2,7 +2,6 @@ package com.sychev.events.mail;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -17,12 +16,16 @@ import java.nio.charset.StandardCharsets;
 @Service
 public class EmailService {
 
-    @Autowired
-    private JavaMailSender emailSender;
+    private final JavaMailSender emailSender;
+    private final SpringTemplateEngine templateEngine;
 
     @Autowired
-    private SpringTemplateEngine templateEngine;
-
+    public EmailService(
+            JavaMailSender emailSender,
+            SpringTemplateEngine templateEngine) {
+        this.emailSender = emailSender;
+        this.templateEngine = templateEngine;
+    }
 
     public void sendSimpleMessage(Mail mail) throws MessagingException, IOException {
         MimeMessage message = emailSender.createMimeMessage();
@@ -35,7 +38,6 @@ public class EmailService {
         String html = templateEngine.process("messageTemplate", context);
 
         html = StringUtils.replace(html, "NAME_FIELD", mail.getModel().get("name").toString());
-        html = StringUtils.replace(html, "PLACE_FIELD", mail.getModel().get("place").toString());
         html = StringUtils.replace(html, "TIME_FIELD", mail.getModel().get("time").toString());
         html = StringUtils.replace(html, "URL_FIELD", mail.getModel().get("url").toString());
 

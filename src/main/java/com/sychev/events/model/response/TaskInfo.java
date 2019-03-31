@@ -79,13 +79,16 @@ public class TaskInfo implements Comparable {
     @Override
     public int compareTo(Object o) {
         if (o instanceof TaskInfo)
-            if ((((TaskInfo) o).getStatus() == TaskEnum.CREATED) && (this.status != TaskEnum.CREATED))
-                return 1;
-            else if ((((TaskInfo) o).getStatus() == TaskEnum.IN_PROGRESS) && (this.status == TaskEnum.RESOLVED))
-                return 1;
-            else
+            if ((((TaskInfo) o).getStatus() == this.status)) {
+                return 0;
+            } else if (((TaskInfo) o).getStatus() == TaskEnum.IN_PROGRESS) {
                 return -1;
+            } else if (((TaskInfo) o).getStatus() == TaskEnum.RESOLVED) {
+                return 1;
+            } else if (((TaskInfo) o).getStatus() == TaskEnum.CREATED && this.status == TaskEnum.IN_PROGRESS) {
+                return 1;
+            }
 
-        return 0;
+        return -1;
     }
 }

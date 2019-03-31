@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -49,7 +50,7 @@ public class EventServiceImpl implements EventService {
         return eventRepository.findAll().stream()
                 .filter(event -> event.getDateFromMillis().isAfter(Instant.now()))
                 .map(ModelConverter::convert)
-                .sorted()
+                .sorted(Comparator.comparing(EventInfo::getDateFromMillis))
                 .collect(Collectors.toList());
     }
 
@@ -58,7 +59,7 @@ public class EventServiceImpl implements EventService {
                 .filter(eventEntity -> eventEntity.getName().contains(name))
                 .filter(event -> event.getDateFromMillis().isAfter(Instant.now()))
                 .map(ModelConverter::convert)
-                .sorted()
+                .sorted(Comparator.comparing(EventInfo::getDateFromMillis))
                 .collect(Collectors.toList());
     }
 

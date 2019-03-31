@@ -6,7 +6,7 @@ import com.sychev.events.model.TaskEnum;
 import java.time.Instant;
 import java.util.UUID;
 
-public class TaskInfo {
+public class TaskInfo implements Comparable {
 
     private UUID taskUid;
     private String name;
@@ -74,5 +74,18 @@ public class TaskInfo {
     @JsonGetter("status")
     public TaskEnum getStatus() {
         return status;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        if (o instanceof TaskInfo)
+            if ((((TaskInfo) o).getStatus() == TaskEnum.CREATED) && (this.status != TaskEnum.CREATED))
+                return 1;
+            else if ((((TaskInfo) o).getStatus() == TaskEnum.IN_PROGRESS) && (this.status == TaskEnum.RESOLVED))
+                return 1;
+            else
+                return -1;
+
+        return 0;
     }
 }

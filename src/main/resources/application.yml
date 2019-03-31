@@ -22,6 +22,17 @@ spring:
     username: fthlzewmqqaaed
     password: "9248f7a0e88d8893f1870e05fef34f53a636e6ebccef10aa5ff6e097d2d1a9c0"
 
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: eventum.best@gmail.com
+    password: eventumtest12345
+    properties.mail.smtp:
+      auth: true
+      starttls.enable: true
+
+
+
 event:
   web:
     allowed-origins:
@@ -37,5 +48,6 @@ event:
       - https://localhost:3000
       - http://localhost:8080
       - https://localhost:8080
+
 
 

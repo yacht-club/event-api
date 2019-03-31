@@ -13,7 +13,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -65,10 +67,13 @@ public class TaskController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<UUID> addTask(@RequestBody @Valid AddTaskRequest request) {
+    public ResponseEntity<UUID> addTask(
+            @RequestBody @Valid AddTaskRequest request,
+            @RequestParam String email,
+            @RequestParam String url) {
         logger.debug("Adding task with name: {}", request.getName());
 
-        return ResponseEntity.ok(taskService.addTask(request));
+        return ResponseEntity.ok(taskService.addTask(request, email, url));
     }
 
     @PostMapping(value = "/link", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -86,7 +91,5 @@ public class TaskController {
         taskService.updateTask(request);
         return ResponseEntity.ok().build();
     }
-
-
 
 }

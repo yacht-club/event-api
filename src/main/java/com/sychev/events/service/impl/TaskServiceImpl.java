@@ -3,6 +3,8 @@ package com.sychev.events.service.impl;
 import com.sychev.events.converter.ModelConverter;
 import com.sychev.events.exception.NotFoundEventException;
 import com.sychev.events.exception.NotFoundTaskException;
+import com.sychev.events.mail.EmailService;
+import com.sychev.events.mail.Mail;
 import com.sychev.events.model.TaskEnum;
 import com.sychev.events.model.entity.EventEntity;
 import com.sychev.events.model.entity.TaskEntity;
@@ -18,7 +20,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -29,18 +36,23 @@ public class TaskServiceImpl implements TaskService {
     private final TaskRepository taskRepository;
     private final EventRepository eventRepository;
 
+    private EmailService emailService;
+
     @Autowired
     public TaskServiceImpl(
             TaskRepository taskRepository,
-            EventRepository eventRepository) {
+            EventRepository eventRepository,
+            EmailService emailService) {
         this.taskRepository = taskRepository;
         this.eventRepository = eventRepository;
+        this.emailService = emailService;
     }
 
     @Override
     public List<TaskInfo> getAllTasks() {
         return taskRepository.findAll().stream()
                 .map(ModelConverter::convert)
+                .sorted()
                 .collect(Collectors.toList());
     }
 
@@ -72,7 +84,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public UUID addTask(AddTaskRequest request) {
+    public UUID addTask(AddTaskRequest request, String email, String url) {
         EventEntity event = eventRepository.findByEventUid(request.getEventUid()).orElseThrow(() -> {
             logger.info("Not found event with uid: " + request.getEventUid());
             return new NotFoundEventException("Not found event with uid: " + request.getEventUid());
@@ -82,7 +94,26 @@ public class TaskServiceImpl implements TaskService {
 
         task.setEvent(event);
 
-        return taskRepository.save(task).getTaskUid();
+        taskRepository.save(task);
+
+        Mail mail = new Mail();
+        mail.setFrom("eventum.best@gmail.com");
+        mail.setTo(email);
+        mail.setSubject("Новая задача!");
+
+        Map<String, String> model = new HashMap<>();
+        model.put("name", task.getName());
+        model.put("time", LocalDateTime.ofInstant(task.getDeadlineTime(), ZoneOffset.UTC).toString());
+        model.put("url", url);
+        mail.setModel(model);
+
+        try {
+            emailService.sendSimpleMessage(mail);
+        } catch (Exception e) {
+            logger.info(e.getLocalizedMessage());
+        }
+
+        return task.getTaskUid();
     }
 
     @Override

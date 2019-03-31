@@ -1,7 +1,6 @@
 package com.sychev.events.model.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sychev.events.model.entity.EventEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.validation.constraints.NotNull;

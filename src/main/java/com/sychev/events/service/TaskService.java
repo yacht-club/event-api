@@ -6,6 +6,8 @@ import com.sychev.events.model.request.LinkTaskWithPartnerRequest;
 import com.sychev.events.model.request.UpdateTaskRequest;
 import com.sychev.events.model.response.TaskInfo;
 
+import javax.mail.MessagingException;
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,7 +23,7 @@ public interface TaskService {
 
     TaskInfo getTask(UUID taskUid);
 
-    UUID addTask(AddTaskRequest request);
+    UUID addTask(AddTaskRequest request, String email, String url);
 
     void linkTaskWithPartner(LinkTaskWithPartnerRequest request);
 

@@ -13,6 +13,7 @@ import com.sychev.events.model.response.EventInfo;
 import com.sychev.events.model.response.EventPartnerInfo;
 import com.sychev.events.model.response.TaskInfo;
 
+import java.time.Instant;
 import java.util.UUID;
 
 public class ModelConverter {
@@ -38,8 +39,7 @@ public class ModelConverter {
                 entity.getPartnerExtId(),
                 entity.getDeadlineTime(),
                 entity.getEvent().getEventUid(),
-                entity.getStatus()
-                );
+                entity.getStatus());
     }
 
     public static EventEntity convert(AddEventRequest request) {
@@ -59,8 +59,7 @@ public class ModelConverter {
                 .setDescription(request.getDescription())
                 .setPartnerExtId(request.getPartnerExtId())
                 .setPrsExtId(request.getPrsExtId())
-                .setDeadlineTime(request.getDeadlineTime());
-
+                .setDeadlineTime(Instant.ofEpochMilli(request.getDeadlineTime()));
     }
 
     public static RelEventPartnersEntity convert(LinkEventWithPartnerRequest request, EventEntity eventEntity) {
@@ -82,8 +81,7 @@ public class ModelConverter {
                 commHistory.getEvent(),
                 commHistory.getPartnerExtId(),
                 commHistory.getChannel(),
-                commHistory.getComment()
-        );
+                commHistory.getComment());
     }
 
     public static EventPartnerInfo convert(RelEventPartnersEntity entity) {

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.validation.constraints.NotNull;
-import java.time.Instant;
 import java.util.UUID;
 
 public class AddTaskRequest {
@@ -16,10 +15,13 @@ public class AddTaskRequest {
     private String description;
 
     @NotNull
-    private Instant deadlineTime;
+    private long deadlineTime;
 
     @NotNull
     private String prsExtId;
+
+    @NotNull
+    private String email;
 
     private String partnerExtId;
 
@@ -28,14 +30,16 @@ public class AddTaskRequest {
     public AddTaskRequest(
             @JsonProperty("name") String name,
             @JsonProperty("description") String description,
-            @JsonProperty("deadlineTime") Instant deadlineTime,
+            @JsonProperty("deadlineTime") long deadlineTime,
             @JsonProperty("prsExtId") String prsExtId,
+            @JsonProperty("email") String email,
             @JsonProperty("partnerExtId") String partnerExtId,
             @JsonProperty("eventUid") UUID eventUid) {
         this.name = name;
         this.description = description;
         this.deadlineTime = deadlineTime;
         this.prsExtId = prsExtId;
+        this.email = email;
         this.partnerExtId = partnerExtId;
         this.eventUid = eventUid;
     }
@@ -48,12 +52,16 @@ public class AddTaskRequest {
         return description;
     }
 
-    public Instant getDeadlineTime() {
+    public long getDeadlineTime() {
         return deadlineTime;
     }
 
     public String getPrsExtId() {
         return prsExtId;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public String getPartnerExtId() {

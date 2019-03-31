@@ -84,7 +84,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public UUID addTask(AddTaskRequest request, String email, String url) {
+    public UUID addTask(AddTaskRequest request) {
         EventEntity event = eventRepository.findByEventUid(request.getEventUid()).orElseThrow(() -> {
             logger.info("Not found event with uid: " + request.getEventUid());
             return new NotFoundEventException("Not found event with uid: " + request.getEventUid());
@@ -98,13 +98,13 @@ public class TaskServiceImpl implements TaskService {
 
         Mail mail = new Mail();
         mail.setFrom("eventum.best@gmail.com");
-        mail.setTo(email);
+        mail.setTo(request.getEmail());
         mail.setSubject("Новая задача!");
 
         Map<String, String> model = new HashMap<>();
         model.put("name", task.getName());
         model.put("time", LocalDateTime.ofInstant(task.getDeadlineTime(), ZoneOffset.UTC).toString());
-        model.put("url", url);
+        model.put("url", "localhost:8080/tasks/"+ task.getTaskUid()); // TODO move to config
         mail.setModel(model);
 
         try {

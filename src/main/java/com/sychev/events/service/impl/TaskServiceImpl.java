@@ -35,8 +35,7 @@ public class TaskServiceImpl implements TaskService {
 
     private final TaskRepository taskRepository;
     private final EventRepository eventRepository;
-
-    private EmailService emailService;
+    private final EmailService emailService;
 
     @Autowired
     public TaskServiceImpl(
@@ -104,7 +103,7 @@ public class TaskServiceImpl implements TaskService {
         Map<String, String> model = new HashMap<>();
         model.put("name", task.getName());
         model.put("time", LocalDateTime.ofInstant(task.getDeadlineTime(), ZoneOffset.UTC).toString());
-        model.put("url", "localhost:8080/tasks/"+ task.getTaskUid()); // TODO move to config
+        model.put("url", "https://eventum.now.sh/tasks/"+ task.getTaskUid()); // TODO move to config
         mail.setModel(model);
 
         try {
@@ -130,7 +129,6 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public void updateTask(UpdateTaskRequest request) {
-
         TaskEntity task = taskRepository.findByTaskUid(request.getTaskUid()).orElseThrow(() -> {
             logger.info("Not found task with uid: " + request.getTaskUid());
             return new NotFoundTaskException("Not found task with uid: " + request.getTaskUid());

@@ -103,7 +103,7 @@ public class TaskServiceImpl implements TaskService {
         Map<String, String> model = new HashMap<>();
         model.put("name", task.getName());
         model.put("time", LocalDateTime.ofInstant(task.getDeadlineTime(), ZoneOffset.UTC).toString());
-        model.put("url", "https://eventum.now.sh/tasks/"+ task.getTaskUid()); // TODO move to config
+        model.put("url", "https://eventum.now.sh"); // TODO move to config
         mail.setModel(model);
 
         try {

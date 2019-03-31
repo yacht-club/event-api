@@ -26,7 +26,12 @@ public class TaskEntity {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id", nullable = false)
+    @SequenceGenerator(
+            schema = "eventum", name = "eventum.tasks_id_seq",
+            sequenceName = "eventum.tasks_id_seq", allocationSize = 1
+    )
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "eventum.tasks_id_seq")
     public Integer getId() {
         return id;
     }
